@@ -1,5 +1,6 @@
 from Entry import Entry
 from Exceptions import CacheMiss
+from EvictionPolicies.FetchEvictionPolicy import fetch_eviction_policy
 
 CACHE_SIZE = 3
 
@@ -10,7 +11,7 @@ class Cache:
         self.tail = None
         self.map = {}
         self.size = CACHE_SIZE
-        self.eviction_policy = eviction_policy
+        self.eviction_policy = fetch_eviction_policy(eviction_policy)
         self.total_tries = 0
         self.cache_hits = 0
 
@@ -70,7 +71,7 @@ class Cache:
             self.cache_hits += 1
             return entry.value
         except KeyError:
-            raise CacheMiss("key not found in cache")
+            raise CacheMiss()
 
     def display(self):
         entry = self.head
