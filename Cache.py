@@ -35,11 +35,9 @@ class Cache:
                                                       self.tail,
                                                       entry)
             else:
-                temp = self.tail.previous
                 evict_entry = self.eviction_policy.find_evict_entry(self)
                 # print(evict_entry)
                 self.remove_entry(evict_entry)
-                self.tail = temp
                 self.head, self.tail = self.add_entry(self.head,
                                                       self.tail,
                                                       entry)
@@ -63,6 +61,9 @@ class Cache:
         prev_entry.next = next_entry
         if next_entry is not None:
             next_entry.previous = prev_entry
+        if entry == self.tail:
+            self.tail = prev_entry
+        self.map.pop(entry.key)
 
     def get_value(self, key):
         self.total_tries += 1
