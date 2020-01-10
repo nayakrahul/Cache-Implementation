@@ -7,5 +7,9 @@ class PoliciesAbstract(ABC):
         pass
 
     @abstractmethod
-    def process_while_entry(self, entry):
+    def process_while_entry(self, entry_key):
+        pass
+
+    @abstractmethod
+    def process_while_removal(self, entry_key):
         pass

@@ -35,9 +35,12 @@ class Cache:
                                                       self.tail,
                                                       entry)
             else:
-                evict_entry = self.eviction_policy.find_evict_entry(self)
+                evict_entry = self.eviction_policy.find_evict_entry(
+                    self)
                 # print(evict_entry)
                 self.remove_entry(evict_entry)
+                self.eviction_policy.process_while_removal(
+                    evict_entry.key)
                 self.head, self.tail = self.add_entry(self.head,
                                                       self.tail,
                                                       entry)
@@ -52,15 +55,18 @@ class Cache:
             entry.next = head
             head.previous = entry
             entry.previous = None
-        self.eviction_policy.process_while_entry(entry)
+        self.eviction_policy.process_while_entry(entry.key)
         return entry, tail
 
     def remove_entry(self, entry):
         prev_entry = entry.previous
         next_entry = entry.next
-        prev_entry.next = next_entry
+        if prev_entry is not None:
+            prev_entry.next = next_entry
         if next_entry is not None:
             next_entry.previous = prev_entry
+        if entry == self.head:
+            self.head = next_entry
         if entry == self.tail:
             self.tail = prev_entry
         self.map.pop(entry.key)
