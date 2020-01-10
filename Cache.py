@@ -11,7 +11,8 @@ class Cache:
         self.tail = None
         self.map = {}
         self.size = CACHE_SIZE
-        self.eviction_policy = fetch_eviction_policy(eviction_policy)
+        self.eviction_policy = fetch_eviction_policy(
+            eviction_policy, self.size)
         self.total_tries = 0
         self.cache_hits = 0
 
@@ -35,12 +36,11 @@ class Cache:
                                                       self.tail,
                                                       entry)
             else:
-                evict_entry = self.eviction_policy.find_evict_entry(
+                evict_entry_key = self.eviction_policy.find_evict_entry(
                     self)
-                # print(evict_entry)
+                # print(evict_entry_key)
+                evict_entry = self.map[evict_entry_key]
                 self.remove_entry(evict_entry)
-                self.eviction_policy.process_while_removal(
-                    evict_entry.key)
                 self.head, self.tail = self.add_entry(self.head,
                                                       self.tail,
                                                       entry)

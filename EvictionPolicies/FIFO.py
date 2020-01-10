@@ -1,26 +1,20 @@
 from datetime import datetime
 
+from EvictionPolicies.Heap import Heap
 from EvictionPolicies.PoliciesAbstract import PoliciesAbstract
 
 
 class FIFO(PoliciesAbstract):
-    def __init__(self):
+    def __init__(self, capacity):
         self.created_on_map = {}
+        self.heap = Heap(capacity, self.created_on_map)
 
     def find_evict_entry(self, cache):
-        min_created_on = datetime.max
-        evict_entry = None
-        entry = cache.head
-        while(entry is not None):
-            if min_created_on > self.created_on_map[entry.key]:
-                min_created_on = self.created_on_map[entry.key]
-                evict_entry = entry
-            entry = entry.next
-        return evict_entry
+        evict_entry_key = self.heap.extract_min()
+        self.created_on_map.pop(evict_entry_key)
+        return evict_entry_key
 
     def process_while_entry(self, entry_key):
         if entry_key not in self.created_on_map:
             self.created_on_map[entry_key] = datetime.now()
-
-    def process_while_removal(self, entry_key):
-        self.created_on_map.pop(entry_key)
+            self.heap.insert(entry_key)

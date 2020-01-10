@@ -4,13 +4,13 @@ from EvictionPolicies.FIFO import FIFO
 from Exceptions import EvictionPolicyNotFound
 
 
-def fetch_eviction_policy(arg):
+def fetch_eviction_policy(arg, capacity):
     arg = arg.lower()
     if arg == 'lru':
         return LRU()
     elif arg == 'lfu':
-        return LFU()
+        return LFU(capacity)
     elif arg == 'fifo':
-        return FIFO()
+        return FIFO(capacity)
     else:
         raise EvictionPolicyNotFound()
