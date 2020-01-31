@@ -1,5 +1,5 @@
 # Cache-Implementation
-Implemented cache with plugable eviction policies like FIFO, LRU, LFU.
+Implemented cache with plugable eviction policies like FIFO, LRU, LFU, RR.
 
 Each eviction policy has:
 * logic to find key to be evicted

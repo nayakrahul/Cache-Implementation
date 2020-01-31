@@ -1,3 +1,4 @@
+from EvictionPolicies.RR import RR
 from EvictionPolicies.LFU import LFU
 from EvictionPolicies.LRU import LRU
 from EvictionPolicies.FIFO import FIFO
@@ -12,5 +13,7 @@ def fetch_eviction_policy(arg, capacity):
         return LFU(capacity)
     elif arg == 'fifo':
         return FIFO(capacity)
+    elif arg == 'rr':
+        return RR(capacity)
     else:
         raise EvictionPolicyNotFound()
