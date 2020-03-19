@@ -1,4 +1,4 @@
-from EvictionPolicies.PoliciesAbstract import PoliciesAbstract
+from EvictionPolicies import PoliciesAbstract
 
 
 class LRU(PoliciesAbstract):

@@ -1,6 +1,6 @@
 import random
 
-from EvictionPolicies.PoliciesAbstract import PoliciesAbstract
+from EvictionPolicies import PoliciesAbstract
 
 
 class RR(PoliciesAbstract):

@@ -1,7 +1,7 @@
-from EvictionPolicies.RR import RR
-from EvictionPolicies.LFU import LFU
-from EvictionPolicies.LRU import LRU
-from EvictionPolicies.FIFO import FIFO
+from EvictionPolicies import RR
+from EvictionPolicies import LFU
+from EvictionPolicies import LRU
+from EvictionPolicies import FIFO
 from Exceptions import EvictionPolicyNotFound
 
 

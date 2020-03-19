@@ -1,5 +1,5 @@
-from EvictionPolicies.Heap import Heap
-from EvictionPolicies.PoliciesAbstract import PoliciesAbstract
+from EvictionPolicies import Heap
+from EvictionPolicies import PoliciesAbstract
 
 
 class LFU(PoliciesAbstract):
