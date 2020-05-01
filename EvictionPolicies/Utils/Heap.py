@@ -25,9 +25,9 @@ class Heap:
         return 2*i + 2
 
     def insert(self, key):
+        self.heap.append(key)
         if len(self.heap) > self.capacity:
             raise HeapOverflow()
-        self.heap.append(key)
         i = len(self.heap) - 1
         while i != 0 and self._compare(self._parent(i), i):
             self._swap(i, self._parent(i))
